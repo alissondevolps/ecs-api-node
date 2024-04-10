@@ -6,8 +6,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 767398042300.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_ECR_URI=767398042300.dkr.ecr.us-east-1.amazonaws.com/images-api-node
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/p2l7t4j9
+      - REPOSITORY_ECR_URI=public.ecr.aws/p2l7t4j9/img-api-node
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
@@ -22,7 +22,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_ECR_URI:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"images-api-node","imageUri":"%s"}]' $REPOSITORY_ECR_URI:latest > imagedefinitions.json
+      - printf '[{"name":"img-api-node","imageUri":"%s"}]' $REPOSITORY_ECR_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: 
