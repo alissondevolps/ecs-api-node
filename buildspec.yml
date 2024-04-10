@@ -22,7 +22,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_ECR_URI:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"images-api-node","imageUri":"%s"}]' $REPOSITORY_ECR_URI:latest > imagedefinitions.json
+      - printf '[{"name":"container-api-node","imageUri":"%s"}]' $REPOSITORY_ECR_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: 
