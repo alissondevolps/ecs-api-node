@@ -1,5 +1,5 @@
 # Imagem base do Node.js
-FROM node:latest
+FROM public.ecr.aws/docker/library/node:slim
 
 RUN mkdir -p /usr/src/app
 
